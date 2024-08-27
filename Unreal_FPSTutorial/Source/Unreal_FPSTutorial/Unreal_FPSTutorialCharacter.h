@@ -43,6 +43,11 @@ class AUnreal_FPSTutorialCharacter : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
+	
+
+	/** Look Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	FVector2D MoveForce;
 
 public:
 	AUnreal_FPSTutorialCharacter();
@@ -55,6 +60,8 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	void Tick(float DeltaTime) override;
 			
 
 protected:

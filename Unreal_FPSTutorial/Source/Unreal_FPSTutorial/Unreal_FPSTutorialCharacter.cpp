@@ -18,6 +18,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 AUnreal_FPSTutorialCharacter::AUnreal_FPSTutorialCharacter()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 		
@@ -127,4 +128,15 @@ void AUnreal_FPSTutorialCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AUnreal_FPSTutorialCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	FVector force = GetActorTransform().InverseTransformVector(GetCharacterMovement()->Velocity);
+	MoveForce.X = force.X;
+	MoveForce.Y = force.Y;
+	MoveForce.XY;
+	GEngine->AddOnScreenDebugMessage(1, -1.0f, FColor::Blue, *MoveForce.ToString());
 }
