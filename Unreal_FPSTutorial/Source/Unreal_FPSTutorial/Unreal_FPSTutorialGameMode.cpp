@@ -3,6 +3,7 @@
 #include "Unreal_FPSTutorialGameMode.h"
 #include "Unreal_FPSTutorialCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "GameFramework/HUD.h"
 
 AUnreal_FPSTutorialGameMode::AUnreal_FPSTutorialGameMode()
 {
@@ -11,5 +12,10 @@ AUnreal_FPSTutorialGameMode::AUnreal_FPSTutorialGameMode()
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}
+	static ConstructorHelpers::FClassFinder<AHUD> BPHUDClass(TEXT("/Game/UI/BP_AimHUD.BP_AimHUD_C"));
+	if (BPHUDClass.Class != NULL)
+	{
+		HUDClass = BPHUDClass.Class;
 	}
 }
